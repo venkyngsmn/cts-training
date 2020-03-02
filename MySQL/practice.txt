@@ -1,0 +1,275 @@
+mysql> create table empl (empid int(5), firstName varchar(20), lastName varchar(20), occupation varchar(20), yearlyIncome decimal(20,4), hiredate date);
+Query OK, 0 rows affected, 1 warning (0.42 sec)
+
+mysql> insert into empl values(1,"aaa","zzz","Analyst",15000,2020-02-14);
+ERROR 1292 (22007): Incorrect date value: '2004' for column 'hiredate' at row 1
+mysql> insert into empl values(1,"aaa","zzz","Analyst",15000.00,2020-02-10);
+ERROR 1292 (22007): Incorrect date value: '2008' for column 'hiredate' at row 1
+mysql> insert into empl values(1,"aaa","zzz","Analyst",15000.00,'2020-02-10');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into empl values(2,"bbb","yyy","Programmer",23000.00,'2020-02-14');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into empl values(3,"ccc","xxx","Scientist",35000.00,'2019-10-06');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into empl values(4,"ddd","www","Doctor",40000.00,'2017-07-29');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into empl values(5,"eee","vvv","Engineer",50000.00,'2016-08-01');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from empl;
++-------+-----------+----------+------------+--------------+------------+
+| empid | firstName | lastName | occupation | yearlyIncome | hiredate   |
++-------+-----------+----------+------------+--------------+------------+
+|     1 | aaa       | zzz      | Analyst    |   15000.0000 | 2020-02-10 |
+|     2 | bbb       | yyy      | Programmer |   23000.0000 | 2020-02-14 |
+|     3 | ccc       | xxx      | Scientist  |   35000.0000 | 2019-10-06 |
+|     4 | ddd       | www      | Doctor     |   40000.0000 | 2017-07-29 |
+|     5 | eee       | vvv      | Engineer   |   50000.0000 | 2016-08-01 |
++-------+-----------+----------+------------+--------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from empl where yearlyIncome > 30000;
++-------+-----------+----------+------------+--------------+------------+
+| empid | firstName | lastName | occupation | yearlyIncome | hiredate   |
++-------+-----------+----------+------------+--------------+------------+
+|     3 | ccc       | xxx      | Scientist  |   35000.0000 | 2019-10-06 |
+|     4 | ddd       | www      | Doctor     |   40000.0000 | 2017-07-29 |
+|     5 | eee       | vvv      | Engineer   |   50000.0000 | 2016-08-01 |
++-------+-----------+----------+------------+--------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> create table emplo (empid int(5), firstName varchar(20), lastName varchar(20), designation varchar(20), salary decimal(20,4), interviewDate date, reportingDate date, releavingDate date, email varchar(30), mobile int(10), address varchar(50));
+Query OK, 0 rows affected, 2 warnings (1.38 sec)
+
+mysql> desc emplo;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| empid         | int           | YES  |     | NULL    |       |
+| firstName     | varchar(20)   | YES  |     | NULL    |       |
+| lastName      | varchar(20)   | YES  |     | NULL    |       |
+| designation   | varchar(20)   | YES  |     | NULL    |       |
+| salary        | decimal(20,4) | YES  |     | NULL    |       |
+| interviewDate | date          | YES  |     | NULL    |       |
+| reportingDate | date          | YES  |     | NULL    |       |
+| releavingDate | date          | YES  |     | NULL    |       |
+| email         | varchar(30)   | YES  |     | NULL    |       |
+| mobile        | int           | YES  |     | NULL    |       |
+| address       | varchar(50)   | YES  |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+11 rows in set (0.08 sec)
+
+mysql> insert into empl values(1,"aaa","zzz","Analyst",15000.00,'2020-02-10','2020-02-14','2020-03-02',"aaa@gmail.com",9875867456,"13,1st street, chennai");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into empl values(1,"aaa","zzz","Analyst",15000.00,'2020-02-10','2020-02-14','2020-03-02',"aaa@gmail.com",9875867456,"13 1st street chennai");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into emplo values(1,"aaa","zzz","Analyst",15000.00,'2020-02-10','2020-02-14','2020-03-02',"aaa@gmail.com",9875867456,"13,1st street, chennai");
+ERROR 1264 (22003): Out of range value for column 'mobile' at row 1
+mysql> insert into emplo values(1,"aaa","zzz","Analyst",15000.00,'2020-02-10','2020-02-14','2020-03-02',"aaa@gmail.com",987586745,"13,1st street, chennai");
+Query OK, 1 row affected (0.09 sec)
+
+mysql> alter table emplo modify mobile int(11);
+Query OK, 0 rows affected, 1 warning (0.24 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> insert into emplo values(1,"aaa","zzz","Analyst",15000.00,'2020-02-10','2020-02-14','2020-03-02',"aaa@gmail.com",9875867456,"13,1st street, chennai");
+ERROR 1264 (22003): Out of range value for column 'mobile' at row 1
+mysql> alter table emplo modify mobile decimal(10,0);
+Query OK, 1 row affected (1.70 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> insert into emplo values(1,"aaa","zzz","Analyst",15000.00,'2020-02-10','2020-02-14','2020-03-02',"aaa@gmail.com",9875867456,"13,1st street, chennai");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from emplo;
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+| empid | firstName | lastName | designation | salary     | interviewDate | reportingDate | releavingDate | email         | mobile     | address                |
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+|     1 | aaa       | zzz      | Analyst     | 15000.0000 | 2020-02-10    | 2020-02-14    | 2020-03-02    | aaa@gmail.com |  987586745 | 13,1st street, chennai |
+|     1 | aaa       | zzz      | Analyst     | 15000.0000 | 2020-02-10    | 2020-02-14    | 2020-03-02    | aaa@gmail.com | 9875867456 | 13,1st street, chennai |
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+2 rows in set (0.00 sec)
+
+mysql> delete from emplo where mobile = 987586745;
+Query OK, 1 row affected (0.17 sec)
+
+mysql> select * from emplo;
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+| empid | firstName | lastName | designation | salary     | interviewDate | reportingDate | releavingDate | email         | mobile     | address                |
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+|     1 | aaa       | zzz      | Analyst     | 15000.0000 | 2020-02-10    | 2020-02-14    | 2020-03-02    | aaa@gmail.com | 9875867456 | 13,1st street, chennai |
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into emplo values(2,"bbb","yyy","Programmer",23000.00,'2019-05-02','2019-06-14','2020-02-04',"bbb@gmail.com",9875861234,"15,1st street, chennai");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from emplo;
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+| empid | firstName | lastName | designation | salary     | interviewDate | reportingDate | releavingDate | email         | mobile     | address                |
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+|     1 | aaa       | zzz      | Analyst     | 15000.0000 | 2020-02-10    | 2020-02-14    | 2020-03-02    | aaa@gmail.com | 9875867456 | 13,1st street, chennai |
+|     2 | bbb       | yyy      | Programmer  | 23000.0000 | 2019-05-02    | 2019-06-14    | 2020-02-04    | bbb@gmail.com | 9875861234 | 15,1st street, chennai |
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from emplo where designation = "Programmer";
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+| empid | firstName | lastName | designation | salary     | interviewDate | reportingDate | releavingDate | email         | mobile     | address                |
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+|     2 | bbb       | yyy      | Programmer  | 23000.0000 | 2019-05-02    | 2019-06-14    | 2020-02-04    | bbb@gmail.com | 9875861234 | 15,1st street, chennai |
++-------+-----------+----------+-------------+------------+---------------+---------------+---------------+---------------+------------+------------------------+
+1 row in set (0.00 sec)
+
+mysql> create table pet(name varchar(20), owner varchar(20), species varchar(20),gender varchar(20), birth date, death date);
+Query OK, 0 rows affected (0.49 sec)
+
+mysql> desc pet;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(20) | YES  |     | NULL    |       |
+| owner   | varchar(20) | YES  |     | NULL    |       |
+| species | varchar(20) | YES  |     | NULL    |       |
+| gender  | varchar(20) | YES  |     | NULL    |       |
+| birth   | date        | YES  |     | NULL    |       |
+| death   | date        | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql>insert into pet values("Lia","Shiny","Lab cross","Female",'2019-07-29','2030-10-12');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into pet values("Brownie","Sharone","Pug","Male",'2006-07-29','2017-10-12');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into pet values("Bruno","Jemmie","Cat","Male",'1996-07-29','1998-10-12');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from pet;
++---------+---------+-----------+--------+------------+------------+
+| name    | owner   | species   | gender | birth      | death      |
++---------+---------+-----------+--------+------------+------------+
+| Lia     | Shiny   | Lab cross | Female | 2019-07-29 | 2030-10-12 |
+| Brownie | Sharone | Pug       | Male   | 2006-07-29 | 2017-10-12 |
+| Bruno   | Jemmie  | Cat       | Male   | 1996-07-29 | 1998-10-12 |
++---------+---------+-----------+--------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> create table people(id int(5),firstName varchar(20), lastName varchar(20),birth date);
+Query OK, 0 rows affected, 1 warning (0.83 sec)
+
+mysql> desc people;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | YES  |     | NULL    |       |
+| firstName | varchar(20) | YES  |     | NULL    |       |
+| lastName  | varchar(20) | YES  |     | NULL    |       |
+| birth     | date        | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table order(order_id int(5),ProdName varchar(20),orderDate date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(order_id int(5),ProdName varchar(20),orderDate date)' at line 1
+mysql> create table orders(order_id int(5),ProdName varchar(20),orderDate date);
+Query OK, 0 rows affected, 1 warning (0.85 sec)
+
+mysql> desc orders;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| order_id  | int         | YES  |     | NULL    |       |
+| ProdName  | varchar(20) | YES  |     | NULL    |       |
+| orderDate | date        | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_emp |
++---------------+
+| author        |
+| categories    |
+| contacts      |
+| country       |
+| datemo        |
+| domainname    |
+| empl          |
+| emplo         |
+| employee      |
+| orders        |
+| people        |
+| pet           |
+| products      |
+| staff         |
++---------------+
+14 rows in set (0.00 sec)
+
+mysql> insert into people values(1,"aaa","bbb",'1998-10-06');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into people values(2,"ccc","ddd",'1996-07-29');
+Query OK, 1 row affected (0.25 sec)
+
+mysql> insert into people values(2,"eee","fff",'1965-04-18');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into people values(4,"ggg","hhh",'1968-12-18');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> update people set id=3 where firstName = "eee";
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from people;
++------+-----------+----------+------------+
+| id   | firstName | lastName | birth      |
++------+-----------+----------+------------+
+|    1 | aaa       | bbb      | 1998-10-06 |
+|    2 | ccc       | ddd      | 1996-07-29 |
+|    3 | eee       | fff      | 1965-04-18 |
+|    4 | ggg       | hhh      | 1968-12-18 |
++------+-----------+----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into orders(1, "soap", '2019-05-12');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1, "soap", '2019-05-12')' at line 1
+mysql> insert into orders values(1, "soap", '2019-05-12');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into orders values(2, "shampoo", '2020-02-12');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into orders values(3, "cream", '2020-02-04');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into orders values(4, "honey", '2020-02-04');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> select * from orders;
++----------+----------+------------+
+| order_id | ProdName | orderDate  |
++----------+----------+------------+
+|        1 | soap     | 2019-05-12 |
+|        2 | shampoo  | 2020-02-12 |
+|        3 | cream    | 2020-02-04 |
+|        4 | honey    | 2020-02-04 |
++----------+----------+------------+
+4 rows in set (0.04 sec)
+
+mysql> select * from orders where date = '2020-02-04';
+ERROR 1054 (42S22): Unknown column 'date' in 'where clause'
+mysql> select * from orders where orderDate = '2020-02-04';
++----------+----------+------------+
+| order_id | ProdName | orderDate  |
++----------+----------+------------+
+|        3 | cream    | 2020-02-04 |
+|        4 | honey    | 2020-02-04 |
++----------+----------+------------+
+2 rows in set (0.06 sec)
+

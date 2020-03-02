@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>HTML5 Month input type</title>
+	<script>
+		function getValue()
+		{
+			var month = document.getElementById("mymonth").value;
+			alert(month);
+		}
+	</script>
+</head>
+<body>
+	<form>
+		<label for="mymonth">Select Month:</label>
+		<input type="month" id="mymonth">
+		<button type="button" onclick="getValue();">Get Value</button>
+	</form>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>HTML5 tel input type</title>
+	<script>
+		function getValue()
+		{
+			var phone = document.getElementById("myphone").value;
+			alert(phone);
+		}
+	</script>
+</head>
+<body>
+	<form>
+		<label for="myphone">Telephone Number:</label>
+		<input type="tel" id="myphone" placeholder="xx-xxxx-xxxx" required>
+		<button type="button" onclick="getValue();">Get Value</button>
+	</form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="em">
+<head>
+	<meta charset="utf-8">
+	<title>Example of CSS Descendant Selector</title>
+	<style>
+		h1 em{
+			color: green;
+		}
+		ul.menu{
+			padding: 7;
+			list-style: none;
+		}
+		ul.menu li{
+			display: inline;
+		}
+		ul.menu li a{
+			margin: 10px;
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<h1>This is a <em>Heading</em></h1>
+	<ul class="menu">
+		<li><a href="#">Home</a></li>
+		<li><a href="#">About</a></li>
+		<li><a href="#">Service</a></li>
+		<li><a href="#">Contact</a></li>
+	</ul>
+</body>
+</html>

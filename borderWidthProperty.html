@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Border-Width Property</title>
+	<style>
+		p.one {
+			border-style: solid;
+			border-width: 5px;
+		}
+		p.two {
+			border-style: solid;
+			border-width: 5px 10px;
+		}
+		p.three {
+			border-style: solid;
+			border-width: 5px 10px 15px;
+		}
+		p.four {
+			border-style: solid;
+			border-width: medium 10px thick 15px;
+		}
+	</style>
+</head>
+<body>
+	<p class="one"><strong>one-value syntax</strong> the single value sets the width of all four border sides.</p>
+	<p class="two"><strong>two-value syntax</strong> the first value sets the width of top and bottom while the second value sets the width of left and right.</p>
+	<p class="three"><strong>three-value syntax</strong> the first value sets the top border,the second value sets the left and right border, the third value sets the bottom border.</p>
+	<p class="four"><strong>four-value syntax</strong> each value sets the width of border individually in the order of top, right, bottom, left.</p>
+	<p><strong>Note:</strong>You must declare the <code>border-style</code> property before the <code>border-width</code> property.</p>
+</body>
+</html>

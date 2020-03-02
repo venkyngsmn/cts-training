@@ -1,0 +1,187 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 16
+Server version: 8.0.19 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use emp;
+Database changed
+mysql> select * from datemo;
++------+------+------------+
+| id   | name | acc_date   |
++------+------+------------+
+|    1 | aaa  | 2020-03-02 |
+|    2 | bbb  | 2020-03-03 |
+|    3 | ccc  | 2020-02-14 |
+|    4 | ddd  | 2020-02-08 |
+|    5 | eee  | 2020-02-04 |
++------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select date_format(acc_date, "%d/%m/%y %h:%i") as mod_date from datemo where id<3;
++----------------+
+| mod_date       |
++----------------+
+| 02/03/20 12:00 |
+| 03/03/20 12:00 |
++----------------+
+2 rows in set (0.05 sec)
+
+mysql> select date_format(acc_date, "%d/%m/%y") as new_date from datemo;
++----------+
+| new_date |
++----------+
+| 02/03/20 |
+| 03/03/20 |
+| 14/02/20 |
+| 08/02/20 |
+| 04/02/20 |
++----------+
+5 rows in set (0.00 sec)
+
+mysql> select id,name,date_format();
+ERROR 1582 (42000): Incorrect parameter count in the call to native function 'date_format'
+mysql> select id,name,date_format() from datemo;
+ERROR 1582 (42000): Incorrect parameter count in the call to native function 'date_format'
+mysql> select id,name,date_format(acc_date, "%d/%m/%y") as newform from datemo;
++------+------+----------+
+| id   | name | newform  |
++------+------+----------+
+|    1 | aaa  | 02/03/20 |
+|    2 | bbb  | 03/03/20 |
+|    3 | ccc  | 14/02/20 |
+|    4 | ddd  | 08/02/20 |
+|    5 | eee  | 04/02/20 |
++------+------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select currentdate();
+ERROR 1305 (42000): FUNCTION emp.currentdate does not exist
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2020-03-02 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select date_format(curdate(), "%m/%d/%y")today;
++----------+
+| today    |
++----------+
+| 03/02/20 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select datediff('2015-11-04','2018-07-29')days;
++------+
+| days |
++------+
+| -998 |
++------+
+1 row in set (0.03 sec)
+
+mysql> select datediff('2015-11-04','2014-07-29')days;
++------+
+| days |
++------+
+|  463 |
++------+
+1 row in set (0.00 sec)
+
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2020-03-02 10:04:01 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select sysdate() as todays date and time;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date and time' at line 1
+mysql> select sysdate() as 'todays date and time';
++----------------------+
+| todays date and time |
++----------------------+
+| 2020-03-02 10:04:44  |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select sysdate(), now();
++---------------------+---------------------+
+| sysdate()           | now()               |
++---------------------+---------------------+
+| 2020-03-02 10:04:58 | 2020-03-02 10:04:58 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> select now(),sleep(2),now();
++---------------------+----------+---------------------+
+| now()               | sleep(2) | now()               |
++---------------------+----------+---------------------+
+| 2020-03-02 10:05:20 |        0 | 2020-03-02 10:05:20 |
++---------------------+----------+---------------------+
+1 row in set (2.02 sec)
+
+mysql> time(time or datetime or expression);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'time(time or datetime or expression)' at line 1
+mysql> TIME(Time or DateTime or expression);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TIME(Time or DateTime or expression)' at line 1
+mysql> select time('10:12:34');
++------------------+
+| time('10:12:34') |
++------------------+
+| 10:12:34         |
++------------------+
+1 row in set (0.00 sec)
+
+mysql>
+
+mysql> select time('2016-05-19 11:14:34');
++-----------------------------+
+| time('2016-05-19 11:14:34') |
++-----------------------------+
+| 11:14:34                    |
++-----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select time('2016-05-19 16:14:39');
++-----------------------------+
+| time('2016-05-19 16:14:39') |
++-----------------------------+
+| 16:14:39                    |
++-----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select now(),time(now());
++---------------------+-------------+
+| now()               | time(now()) |
++---------------------+-------------+
+| 2020-03-02 10:11:32 | 10:11:32    |
++---------------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select utc_time(), time(utc_time());
++------------+------------------+
+| utc_time() | time(utc_time()) |
++------------+------------------+
+| 04:42:06   | 04:42:06         |
++------------+------------------+
+1 row in set (0.00 sec)
+
+mysql> select utc_timestamp(), time(utc_timestamp());
++---------------------+-----------------------+
+| utc_timestamp()     | time(utc_timestamp()) |
++---------------------+-----------------------+
+| 2020-03-02 04:42:27 | 04:42:27              |
++---------------------+-----------------------+
+1 row in set (0.00 sec)
+
+mysql>

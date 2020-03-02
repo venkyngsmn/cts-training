@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Greatest Number</title>
+	<script type="text/javascript">
+		function greater()
+		{
+			var num1 = parseInt(document.getElementById("num1").value);
+			var num2 = parseInt(document.getElementById("num2").value);
+			var num3 = parseInt(document.getElementById("num3").value);
+			var ansD = 0;
+			if(num1 > num2)
+			{
+				if(num1 > num3)
+				{
+					ansD = num1;
+				}
+				else
+				{
+					ansD = num3;
+				}
+			}
+			else if(num2 > num3)
+			{
+				ansD = num2;
+			}
+			else
+			{
+				ansD = num3;
+			}
+			document.getElementById("answer").value=""+ansD;
+
+		}
+	</script>
+</head>
+<body>
+	num1 = <input type="text" id="num1" name="v1"/><br><br>
+	num2 = <input type="text" id="num2" name="v2"/><br><br>
+	num3 = <input type="text" id="num3" name="v3"/><br><br>
+	<input type="button" name="Submit" value="Click here" onclick="javascript:greater()"/><br><br>
+	Greatest = <input type="text" id="answer" name="answer"/>
+</body>
+</html>

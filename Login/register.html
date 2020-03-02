@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Registration</title>
+	<link rel="stylesheet" type="text/css" href="registration.css">
+</head>
+<body onload="document.form1.focus()">
+	<div class="mail">
+		<h2>Registration</h2>
+		<form name="form1" onsubmit="return (Validation());" class="form-wrap">
+			<ul>
+				<li>Username : <input type="text" name="username" class="form-control" /></li>
+				<li>&nbsp;</li>
+				<li>Password : <input type="Password" name="password" class="form-control"/></li>
+				<li>&nbsp;</li>
+				<li>Email : <input type="text" name="email" class="form-control"/></li>
+				<li>&nbsp;</li>
+				<li>Mobile No : <input type="text" name="mobno" class="form-control"/></li>
+				<li>&nbsp;</li>
+				<li>User ID : <input type="text" name="userid" class="form-control"/></li>
+				<li>&nbsp;</li>
+				<li>Address : <input type="text" name="address" class="form-control"/></li>
+				<li>&nbsp;</li>
+				<li class="submit"><input type="submit" class="primary-btn" value="submit" onclick="Validation(document.form1)" /></li>
+				<li>&nbsp;</li>
+			</ul>
+		</form>
+	</div>
+	<script src="register.js" type="text/javascript"></script>
+</body>
+</html>

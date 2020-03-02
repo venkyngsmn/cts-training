@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Login Form</title>
+	<style type="text/css">
+		body{
+			padding: 20%;
+			background-color: black;
+		}
+		form{
+			padding: 10% 5% 10% 32%;
+			border: 1px solid black;
+			background-color: white;
+		}
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		function validate()
+		{
+			var username = document.loginForm.username.value;
+			var password = document.loginForm.password.value;
+			if(username == null || username == "")
+			{
+				alert("Username cannot be blank");
+				return false;
+			}
+			else if(password == null || password == "")
+			{
+				alert("Passeord cannot be blank");
+				return false;
+			}
+		}
+	</script>
+	<form name="loginForm" onsubmit="return validate()" class="form-wrap">
+		<h1>Login</h1>
+		<input type="text" name="username" placeholder="Username" class="form-control"><br><br>
+		<input type="password" name="password" placeholder="Password" class="form-control"><br><br>
+		<input type="submit" class="primary-btn" value="submit">
+	</form>
+</body>
+</html>

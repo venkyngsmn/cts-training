@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Specify Multiple Source for Image in HTML</title>
+</head>
+<body>
+<picture>
+<source media="(min-width: 1000px)"srcset="D:\programs\moon.jpeg">
+<source media="(max-width: 500px)" srcset="D:\programs\moon.jpeg">
+<img src="D:\programs\moon.jpeg" alt="moon">
+</picture>
+</body>
+</html>

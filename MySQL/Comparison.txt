@@ -1,0 +1,155 @@
+mysql> select greatest(20,25,19);
++--------------------+
+| greatest(20,25,19) |
++--------------------+
+|                 25 |
++--------------------+
+1 row in set (0.04 sec)
+
+mysql> select greatest(2.0,3.6,6,8,7.5);
++---------------------------+
+| greatest(2.0,3.6,6,8,7.5) |
++---------------------------+
+|                       8.0 |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> select greatest('a','g','z','s');
++---------------------------+
+| greatest('a','g','z','s') |
++---------------------------+
+| z                         |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> select greatest("tutorial","mysql","oracle");
++---------------------------------------+
+| greatest("tutorial","mysql","oracle") |
++---------------------------------------+
+| tutorial                              |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select greatest(10,'10',10.0);
++------------------------+
+| greatest(10,'10',10.0) |
++------------------------+
+| 10.0                   |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select greatest(10,20,Null);
++----------------------+
+| greatest(10,20,Null) |
++----------------------+
+|                 NULL |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select greatest(10,20,"Null");
++------------------------+
+| greatest(10,20,"Null") |
++------------------------+
+| Null                   |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select greatest("w3schools.com","tutorialspoint.com");
++------------------------------------------------+
+| greatest("w3schools.com","tutorialspoint.com") |
++------------------------------------------------+
+| w3schools.com                                  |
++------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> create table emp1(empid int(5), firstname varchar(20), lastname varchar(20), occupation varchar(20), yearlyincome decimal(14,4), sales int(5), hiredate date);
+Query OK, 0 rows affected, 2 warnings (1.04 sec)
+
+mysql> insert into emp1 values(1, "Shiny", "J", "Engineer", 50000, 50, '2020-02-08');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into emp1 values(2, "Jasmine", "Jerrina", "Analyst", 40000, 30, '2020-02-10');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> select * from emp1;
++-------+-----------+----------+------------+--------------+-------+------------+
+| empid | firstname | lastname | occupation | yearlyincome | sales | hiredate   |
++-------+-----------+----------+------------+--------------+-------+------------+
+|     1 | Shiny     | J        | Engineer   |   50000.0000 |    50 | 2020-02-08 |
+|     2 | Jasmine   | Jerrina  | Analyst    |   40000.0000 |    30 | 2020-02-10 |
++-------+-----------+----------+------------+--------------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> create table website(contactId int(5), Name varchar(20), website1 varchar(20), website2 varchar(20));
+Query OK, 0 rows affected, 1 warning (0.79 sec)
+
+mysql> insert into website values(1, "Shiny", "shiny@gmail.com", "shiny@live.com");
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into website values(2, "Jasper", "jas@gmail.com", "jas@gmail.com");
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into website values(3, "Jerrina", "jerrina@gmail.com", "jerrina");
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into website values(4, "Jasmine", NULL, NULL);
+Query OK, 1 row affected (0.23 sec)
+
+mysql> select * from website;
++-----------+---------+-------------------+----------------+
+| contactId | Name    | website1          | website2       |
++-----------+---------+-------------------+----------------+
+|         1 | Shiny   | shiny@gmail.com   | shiny@live.com |
+|         2 | Jasper  | jas@gmail.com     | jas@gmail.com  |
+|         3 | Jerrina | jerrina@gmail.com | jerrina        |
+|         4 | Jasmine | NULL              | NULL           |
++-----------+---------+-------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from website where website1 = website2;
++-----------+--------+---------------+---------------+
+| contactId | Name   | website1      | website2      |
++-----------+--------+---------------+---------------+
+|         2 | Jasper | jas@gmail.com | jas@gmail.com |
++-----------+--------+---------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select * from website where website1 <=> website2;
++-----------+---------+---------------+---------------+
+| contactId | Name    | website1      | website2      |
++-----------+---------+---------------+---------------+
+|         2 | Jasper  | jas@gmail.com | jas@gmail.com |
+|         4 | Jasmine | NULL          | NULL          |
++-----------+---------+---------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from website where name like %i%;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%i%' at line 1
+mysql> select * from website where Name like %i%;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%i%' at line 1
+mysql> select * from website where Name like '%i%';
++-----------+---------+-------------------+----------------+
+| contactId | Name    | website1          | website2       |
++-----------+---------+-------------------+----------------+
+|         1 | Shiny   | shiny@gmail.com   | shiny@live.com |
+|         3 | Jerrina | jerrina@gmail.com | jerrina        |
+|         4 | Jasmine | NULL              | NULL           |
++-----------+---------+-------------------+----------------+
+3 rows in set (0.04 sec)
+
+mysql> select * from website where Name like '_e%';
++-----------+---------+-------------------+----------+
+| contactId | Name    | website1          | website2 |
++-----------+---------+-------------------+----------+
+|         3 | Jerrina | jerrina@gmail.com | jerrina  |
++-----------+---------+-------------------+----------+
+1 row in set (0.00 sec)
+
+mysql> Select least(20,15,3);
++----------------+
+| least(20,15,3) |
++----------------+
+|              3 |
++----------------+
+1 row in set (0.00 sec)
+

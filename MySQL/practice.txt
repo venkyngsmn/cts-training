@@ -273,3 +273,420 @@ mysql> select * from orders where orderDate = '2020-02-04';
 +----------+----------+------------+
 2 rows in set (0.06 sec)
 
+mysql> select * from datemo;
++------+------+------------+
+| id   | name | acc_date   |
++------+------+------------+
+|    1 | aaa  | 2020-03-02 |
+|    2 | bbb  | 2020-03-03 |
+|    3 | ccc  | 2020-02-14 |sle
+|    4 | ddd  | 2020-02-08 |
+|    5 | eee  | 2020-02-04 |
++------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from datemo where acc_date between cast('20200208' as date) and cast('20200302' as date) order by acc_date;
++------+------+------------+
+| id   | name | acc_date   |
++------+------+------------+
+|    4 | ddd  | 2020-02-08 |
+|    3 | ccc  | 2020-02-14 |
+|    1 | aaa  | 2020-03-02 |
++------+------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select 1 xor 1;
++---------+
+| 1 xor 1 |
++---------+
+|       0 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select 1 xor 0;
++---------+
+| 1 xor 0 |
++---------+
+|       1 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select 0 xor 0;
++---------+
+| 0 xor 0 |
++---------+
+|       0 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select 0 xor null;
++------------+
+| 0 xor null |
++------------+
+|       NULL |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select 1 xor null;
++------------+
+| 1 xor null |
++------------+
+|       NULL |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select 1 xor 1 xor 1 xor 0;
++---------------------+
+| 1 xor 1 xor 1 xor 0 |
++---------------------+
+|                   1 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> create table cust(custID int(5), custName varchar(20), ContactName varchar(20), Address varchar(50), City varchar(20), PostalCode int(6), Country varchar(20));
+ERROR 1046 (3D000): No database selected
+mysql> use emp;
+Database changed
+mysql> create table cust(custID int(5), custName varchar(20), ContactName varchar(20), Address varchar(50), City varchar(20), PostalCode int(6), Country varchar(20));
+Query OK, 0 rows affected, 2 warnings (0.63 sec)
+
+mysql> insert into cust values(1, "Shiny", "SJK", "14,1st Street,Anna Nagar","Chennai",600089,"India");
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from cust;
++--------+----------+-------------+--------------------------+---------+------------+---------+
+| custID | custName | ContactName | Address                  | City    | PostalCode | Country |
++--------+----------+-------------+--------------------------+---------+------------+---------+
+|      1 | Shiny    | SJK         | 14,1st Street,Anna Nagar | Chennai |     600089 | India   |
++--------+----------+-------------+--------------------------+---------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> insert into cust values(2, "Jasmine", "JK", "173,1st Street,Sathya Nagar","Chennai",600089,"India");
+Query OK, 1 row affected (0.15 sec)
+
+mysql> select * from cust;
++--------+----------+-------------+-----------------------------+---------+------------+---------+
+| custID | custName | ContactName | Address                     | City    | PostalCode | Country |
++--------+----------+-------------+-----------------------------+---------+------------+---------+
+|      1 | Shiny    | SJK         | 14,1st Street,Anna Nagar    | Chennai |     600089 | India   |
+|      2 | Jasmine  | JK          | 173,1st Street,Sathya Nagar | Chennai |     600089 | India   |
++--------+----------+-------------+-----------------------------+---------+------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> insert into cust values(3, "Jasper", "Dsouza", "14,9th Street,Anna Nagar","Chennai",600089,"India");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into cust values(4, "Jas", "Diana", "14,9th Street,sathya Nagar","Tirunelveli",600456,"India");
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into cust values(5, "Jelena", "Salome", "14,9th Street,michale colony","Dallas",600456,"Texas");
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select * from cust;
++--------+----------+-------------+------------------------------+-------------+------------+---------+
+| custID | custName | ContactName | Address                      | City        | PostalCode | Country |
++--------+----------+-------------+------------------------------+-------------+------------+---------+
+|      1 | Shiny    | SJK         | 14,1st Street,Anna Nagar     | Chennai     |     600089 | India   |
+|      2 | Jasmine  | JK          | 173,1st Street,Sathya Nagar  | Chennai     |     600089 | India   |
+|      3 | Jasper   | Dsouza      | 14,9th Street,Anna Nagar     | Chennai     |     600089 | India   |
+|      4 | Jas      | Diana       | 14,9th Street,sathya Nagar   | Tirunelveli |     600456 | India   |
+|      5 | Jelena   | Salome      | 14,9th Street,michale colony | Dallas      |     600456 | Texas   |
++--------+----------+-------------+------------------------------+-------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from cust group by city;
++--------+----------+-------------+------------------------------+-------------+------------+---------+
+| custID | custName | ContactName | Address                      | City        | PostalCode | Country |
++--------+----------+-------------+------------------------------+-------------+------------+---------+
+|      1 | Shiny    | SJK         | 14,1st Street,Anna Nagar     | Chennai     |     600089 | India   |
+|      4 | Jas      | Diana       | 14,9th Street,sathya Nagar   | Tirunelveli |     600456 | India   |
+|      5 | Jelena   | Salome      | 14,9th Street,michale colony | Dallas      |     600456 | Texas   |
++--------+----------+-------------+------------------------------+-------------+------------+---------+
+3 rows in set (0.01 sec)
+
+mysql> select custName,City from cust group by City;
++----------+-------------+
+| custName | City        |
++----------+-------------+
+| Shiny    | Chennai     |
+| Jas      | Tirunelveli |
+| Jelena   | Dallas      |
++----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> use emp;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_emp |
++---------------+
+| author        |
+| categories    |
+| contacts      |
+| country       |
+| cust          |
+| customers     |
+| datemo        |
+| domainname    |
+| emp1          |
+| empl          |
+| emplo         |
+| employee      |
+| orders        |
+| people        |
+| pet           |
+| products      |
+| staff         |
+| website       |
++---------------+
+18 rows in set (0.00 sec)
+
+mysql> select * from customers;
++------+---------+--------+------+
+| id   | name    | salary | code |
++------+---------+--------+------+
+|    1 | Shiny   |  50000 | A    |
+|    2 | Jasmine |  40000 | B    |
+|    3 | Jerrina |  30000 | C    |
+|    4 | Jasper  |  25000 | D    |
+|    5 | Amy     |  30000 | E    |
++------+---------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> select ifnull((select name from customers where id = 3),'NULL') as FirstName;
++-----------+
+| FirstName |
++-----------+
+| Jerrina   |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> update customers set name = "NULL" where id = 3;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customers;
++------+---------+--------+------+
+| id   | name    | salary | code |
++------+---------+--------+------+
+|    1 | Shiny   |  50000 | A    |
+|    2 | Jasmine |  40000 | B    |
+|    3 | NULL    |  30000 | C    |
+|    4 | Jasper  |  25000 | D    |
+|    5 | Amy     |  30000 | E    |
++------+---------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> select ifnull((select name from customers where id = 3),'NULL') as FirstName;
++-----------+
+| FirstName |
++-----------+
+| NULL      |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select 3 in (1,2,3,4,5,6);
++--------------------+
+| 3 in (1,2,3,4,5,6) |
++--------------------+
+|                  1 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select 3 in (1,2,3,4,5,6,3);
++----------------------+
+| 3 in (1,2,3,4,5,6,3) |
++----------------------+
+|                    1 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select 3 in (1,2,4,5,6);
++------------------+
+| 3 in (1,2,4,5,6) |
++------------------+
+|                0 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from customers where id in (1,2,3);
++------+---------+--------+------+
+| id   | name    | salary | code |
++------+---------+--------+------+
+|    1 | Shiny   |  50000 | A    |
+|    2 | Jasmine |  40000 | B    |
+|    3 | NULL    |  30000 | C    |
++------+---------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customers where id in (2,3);
++------+---------+--------+------+
+| id   | name    | salary | code |
++------+---------+--------+------+
+|    2 | Jasmine |  40000 | B    |
+|    3 | NULL    |  30000 | C    |
++------+---------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select ((10,2) in (1,2),(10,2),(100,200));
+ERROR 1241 (21000): Operand should contain 2 column(s)
+mysql> select (10,2) in ((1,2),(10,2),(100,200));
++------------------------------------+
+| (10,2) in ((1,2),(10,2),(100,200)) |
++------------------------------------+
+|                                  1 |
++------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select 4 in ('1','2','3','4');
++------------------------+
+| 4 in ('1','2','3','4') |
++------------------------+
+|                      1 |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select 'abc' in ('xyz','abc','a');
++----------------------------+
+| 'abc' in ('xyz','abc','a') |
++----------------------------+
+|                          1 |
++----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select 'a' in ('xyz','abc','azy');
++----------------------------+
+| 'a' in ('xyz','abc','azy') |
++----------------------------+
+|                          0 |
++----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select 4 in (1,2,3,4,'5');
++--------------------+
+| 4 in (1,2,3,4,'5') |
++--------------------+
+|                  1 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select 4 not in (2,4,5,8);
++--------------------+
+| 4 not in (2,4,5,8) |
++--------------------+
+|                  0 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select 4 not in (2,3,5,8);
++--------------------+
+| 4 not in (2,3,5,8) |
++--------------------+
+|                  1 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from customers where id not in (2,3);
++------+--------+--------+------+
+| id   | name   | salary | code |
++------+--------+--------+------+
+|    1 | Shiny  |  50000 | A    |
+|    4 | Jasper |  25000 | D    |
+|    5 | Amy    |  30000 | E    |
++------+--------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select 1 is true;
++-----------+
+| 1 is true |
++-----------+
+|         1 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select 0 is true,0 is false;
++-----------+------------+
+| 0 is true | 0 is false |
++-----------+------------+
+|         0 |          1 |
++-----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select 1 is true,0 is false,null is unknown;
++-----------+------------+-----------------+
+| 1 is true | 0 is false | null is unknown |
++-----------+------------+-----------------+
+|         1 |          1 |               1 |
++-----------+------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select id,name,salary,salary is true,salary is false, salary is unknown,code from customers;
++------+---------+--------+----------------+-----------------+-------------------+------+
+| id   | name    | salary | salary is true | salary is false | salary is unknown | code |
++------+---------+--------+----------------+-----------------+-------------------+------+
+|    1 | Shiny   |  50000 |              1 |               0 |                 0 | A    |
+|    2 | Jasmine |  40000 |              1 |               0 |                 0 | B    |
+|    3 | NULL    |  30000 |              1 |               0 |                 0 | C    |
+|    4 | Jasper  |  25000 |              1 |               0 |                 0 | D    |
+|    5 | Amy     |  30000 |              1 |               0 |                 0 | E    |
++------+---------+--------+----------------+-----------------+-------------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update customers salary = null where name = 'null';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= null where name = 'null'' at line 1
+mysql> update customers salary = null where name = "NULL";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= null where name = "NULL"' at line 1
+mysql> update customers salary = 'null' where name = "NULL";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 'null' where name = "NULL"' at line 1
+mysql> update customers set salary = 'null' where name = "NULL";
+ERROR 1366 (HY000): Incorrect integer value: 'null' for column 'salary' at row 3
+mysql> update customers set salary = null where name = "NULL";
+Query OK, 1 row affected (0.15 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customers;
++------+---------+--------+------+
+| id   | name    | salary | code |
++------+---------+--------+------+
+|    1 | Shiny   |  50000 | A    |
+|    2 | Jasmine |  40000 | B    |
+|    3 | NULL    |   NULL | C    |
+|    4 | Jasper  |  25000 | D    |
+|    5 | Amy     |  30000 | E    |
++------+---------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> select id,name,salary,salary is true,salary is false, salary is unknown,code from customers;
++------+---------+--------+----------------+-----------------+-------------------+------+
+| id   | name    | salary | salary is true | salary is false | salary is unknown | code |
++------+---------+--------+----------------+-----------------+-------------------+------+
+|    1 | Shiny   |  50000 |              1 |               0 |                 0 | A    |
+|    2 | Jasmine |  40000 |              1 |               0 |                 0 | B    |
+|    3 | NULL    |   NULL |              0 |               0 |                 1 | C    |
+|    4 | Jasper  |  25000 |              1 |               0 |                 0 | D    |
+|    5 | Amy     |  30000 |              1 |               0 |                 0 | E    |
++------+---------+--------+----------------+-----------------+-------------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select salary from customers where name is null;
+Empty set (0.00 sec)
+
+mysql> select salary from customers where salary is null;
++--------+
+| salary |
++--------+
+|   NULL |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select salary from customers where salary is not null;
++--------+
+| salary |
++--------+
+|  50000 |
+|  40000 |
+|  25000 |
+|  30000 |
++--------+
+4 rows in set (0.00 sec)
+

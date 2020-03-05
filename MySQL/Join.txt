@@ -1,0 +1,198 @@
+mysql> use emp;
+Database changed
+mysql> create table student(id int(5), name varchar(20));
+Query OK, 0 rows affected, 1 warning (0.51 sec)
+
+mysql> create table studadd(id int(5), address varchar(50));
+Query OK, 0 rows affected, 1 warning (0.70 sec)
+
+mysql> insert into student(1,"Shiny");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,"Shiny")' at line 1
+mysql> insert into student values(1,"Shiny");
+Query OK, 1 row affected (0.24 sec)
+
+mysql> insert into student values(2,"Jasmine");
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into student values(3,"Jerrina");
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into student values(4,"Jasper");
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into student values(5,"Sharone");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into studadd values(1, "Chennai");
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into studadd values(2, "Chennai");
+Query OK, 1 row affected (0.20 sec)
+
+mysql> insert into studadd values(3, "Bangalore");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into studadd values(4, "Texas");
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into studadd values(5, "Tirunelveli");
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from student;
++------+---------+
+| id   | name    |
++------+---------+
+|    1 | Shiny   |
+|    2 | Jasmine |
+|    3 | Jerrina |
+|    4 | Jasper  |
+|    5 | Sharone |
++------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from studadd;
++------+-------------+
+| id   | address     |
++------+-------------+
+|    1 | Chennai     |
+|    2 | Chennai     |
+|    3 | Bangalore   |
+|    4 | Texas       |
+|    5 | Tirunelveli |
++------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student inner join address where student.id = address.id;
+ERROR 1146 (42S02): Table 'emp.address' doesn't exist
+
+#####Inner Join######
+
+mysql> select * from student inner join studadd where student.id = studadd.id;
++------+---------+------+-------------+
+| id   | name    | id   | address     |
++------+---------+------+-------------+
+|    1 | Shiny   |    1 | Chennai     |
+|    2 | Jasmine |    2 | Chennai     |
+|    3 | Jerrina |    3 | Bangalore   |
+|    4 | Jasper  |    4 | Texas       |
+|    5 | Sharone |    5 | Tirunelveli |
++------+---------+------+-------------+
+5 rows in set (0.00 sec)
+
+#####Natural Join#####
+
+mysql> select * from student natural join studadd;
++------+---------+-------------+
+| id   | name    | address     |
++------+---------+-------------+
+|    1 | Shiny   | Chennai     |
+|    2 | Jasmine | Chennai     |
+|    3 | Jerrina | Bangalore   |
+|    4 | Jasper  | Texas       |
+|    5 | Sharone | Tirunelveli |
++------+---------+-------------+
+5 rows in set (0.00 sec)
+
+####Left Outer Join#####
+
+mysql> select * from student left outer join studadd on student.id = studadd.id;
++------+---------+------+-------------+
+| id   | name    | id   | address     |
++------+---------+------+-------------+
+|    1 | Shiny   |    1 | Chennai     |
+|    2 | Jasmine |    2 | Chennai     |
+|    3 | Jerrina |    3 | Bangalore   |
+|    4 | Jasper  |    4 | Texas       |
+|    5 | Sharone |    5 | Tirunelveli |
++------+---------+------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> create table profession(id int(5), designation varchar(20));
+Query OK, 0 rows affected, 1 warning (0.88 sec)
+
+mysql> insert into profession values(1,"Programmer");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into profession values(2,"Analyst");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from student left outer join profession on student.id = profession.id;
++------+---------+------+-------------+
+| id   | name    | id   | designation |
++------+---------+------+-------------+
+|    1 | Shiny   |    1 | Programmer  |
+|    2 | Jasmine |    2 | Analyst     |
+|    3 | Jerrina | NULL | NULL        |
+|    4 | Jasper  | NULL | NULL        |
+|    5 | Sharone | NULL | NULL        |
++------+---------+------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student left join profession using(id);
++------+---------+-------------+
+| id   | name    | designation |
++------+---------+-------------+
+|    1 | Shiny   | Programmer  |
+|    2 | Jasmine | Analyst     |
+|    3 | Jerrina | NULL        |
+|    4 | Jasper  | NULL        |
+|    5 | Sharone | NULL        |
++------+---------+-------------+
+5 rows in set (0.00 sec)
+
+####Right Join#####
+
+mysql> select * from student right outer join profession on student.id = profession.id;
++------+---------+------+-------------+
+| id   | name    | id   | designation |
++------+---------+------+-------------+
+|    1 | Shiny   |    1 | Programmer  |
+|    2 | Jasmine |    2 | Analyst     |
++------+---------+------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> create table studid(id int(5), studid int(10));
+Query OK, 0 rows affected, 2 warnings (0.48 sec)
+
+mysql> insert into studid values(1, 876789);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into studid values(2, 876567);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from studid right outer join studadd on studid.id = studadd.id;
++------+--------+------+-------------+
+| id   | studid | id   | address     |
++------+--------+------+-------------+
+|    1 | 876789 |    1 | Chennai     |
+|    2 | 876567 |    2 | Chennai     |
+| NULL |   NULL |    3 | Bangalore   |
+| NULL |   NULL |    4 | Texas       |
+| NULL |   NULL |    5 | Tirunelveli |
++------+--------+------+-------------+
+5 rows in set (0.00 sec)
+
+####Full Outer Join#####
+
+MySQL does not support full outer join.
+
+####Cross Join####
+
+mysql> select * from studid cross join studadd;
++------+--------+------+-------------+
+| id   | studid | id   | address     |
++------+--------+------+-------------+
+|    1 | 876789 |    1 | Chennai     |
+|    2 | 876567 |    1 | Chennai     |
+|    1 | 876789 |    2 | Chennai     |
+|    2 | 876567 |    2 | Chennai     |
+|    1 | 876789 |    3 | Bangalore   |
+|    2 | 876567 |    3 | Bangalore   |
+|    1 | 876789 |    4 | Texas       |
+|    2 | 876567 |    4 | Texas       |
+|    1 | 876789 |    5 | Tirunelveli |
+|    2 | 876567 |    5 | Tirunelveli |
++------+--------+------+-------------+
+10 rows in set (0.00 sec)
+
+

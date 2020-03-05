@@ -1,0 +1,185 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.19 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use emp;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_emp |
++---------------+
+| author        |
+| categories    |
+| contacts      |
+| country       |
+| datemo        |
+| domainname    |
+| empl          |
+| emplo         |
+| employee      |
+| orders        |
+| people        |
+| pet           |
+| products      |
+| staff         |
++---------------+
+14 rows in set (0.07 sec)
+
+mysql> create table customers (id int(5), name varchar(20), salary int(5), code varchar(5));
+Query OK, 0 rows affected, 2 warnings (1.80 sec)
+
+mysql> desc customers;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | YES  |     | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| salary | int         | YES  |     | NULL    |       |
+| code   | varchar(5)  | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.08 sec)
+
+mysql> insert into customers values(1, "Shiny", 50000, "A");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into customers values(2, "Jasmine", 40000, "B");
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into customers values(3, "Jerrina", 30000, "A");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into customers values(4, "Jasper", 25000, "B");
+Query OK, 1 row affected (0.19 sec)
+
+mysql> insert into customers values(5, "Amy", 30000, "B");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from customers;
++------+---------+--------+------+
+| id   | name    | salary | code |
++------+---------+--------+------+
+|    1 | Shiny   |  50000 | A    |
+|    2 | Jasmine |  40000 | B    |
+|    3 | Jerrina |  30000 | A    |
+|    4 | Jasper  |  25000 | B    |
+|    5 | Amy     |  30000 | B    |
++------+---------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> update customers set code = "C" where name = "Jerrina";
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update customers set code = "D" where name = "Jasper";
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update customers set code = "E" where name = "Amy";
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customers;
++------+---------+--------+------+
+| id   | name    | salary | code |
++------+---------+--------+------+
+|    1 | Shiny   |  50000 | A    |
+|    2 | Jasmine |  40000 | B    |
+|    3 | Jerrina |  30000 | C    |
+|    4 | Jasper  |  25000 | D    |
+|    5 | Amy     |  30000 | E    |
++------+---------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from customers where code between "B" and "D" order by salary;
++------+---------+--------+------+
+| id   | name    | salary | code |
++------+---------+--------+------+
+|    4 | Jasper  |  25000 | D    |
+|    3 | Jerrina |  30000 | C    |
+|    2 | Jasmine |  40000 | B    |
++------+---------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customers where code between "B" and "D";
++------+---------+--------+------+
+| id   | name    | salary | code |
++------+---------+--------+------+
+|    2 | Jasmine |  40000 | B    |
+|    3 | Jerrina |  30000 | C    |
+|    4 | Jasper  |  25000 | D    |
++------+---------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customers where code not between "B" and "D";
++------+-------+--------+------+
+| id   | name  | salary | code |
++------+-------+--------+------+
+|    1 | Shiny |  50000 | A    |
+|    5 | Amy   |  30000 | E    |
++------+-------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customers where code not between "B" and "D" order by salary;
++------+-------+--------+------+
+| id   | name  | salary | code |
++------+-------+--------+------+
+|    5 | Amy   |  30000 | E    |
+|    1 | Shiny |  50000 | A    |
++------+-------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customers where salary between '30000' and '50000';
++------+---------+--------+------+
+| id   | name    | salary | code |
++------+---------+--------+------+
+|    1 | Shiny   |  50000 | A    |
+|    2 | Jasmine |  40000 | B    |
+|    3 | Jerrina |  30000 | C    |
+|    5 | Amy     |  30000 | E    |
++------+---------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customers where salary between 30000 and 50000;//quotes not needed for numbers
++------+---------+--------+------+
+| id   | name    | salary | code |
++------+---------+--------+------+
+|    1 | Shiny   |  50000 | A    |
+|    2 | Jasmine |  40000 | B    |
+|    3 | Jerrina |  30000 | C    |
+|    5 | Amy     |  30000 | E    |
++------+---------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select * from datemo;
++------+------+------------+
+| id   | name | acc_date   |
++------+------+------------+
+|    1 | aaa  | 2020-03-02 |
+|    2 | bbb  | 2020-03-03 |
+|    3 | ccc  | 2020-02-14 |
+|    4 | ddd  | 2020-02-08 |
+|    5 | eee  | 2020-02-04 |
++------+------+------------+
+5 rows in set (0.06 sec)
+
+mysql> select * from datemo where acc_date between '2020-03-02' and '2020-02-14';
+Empty set (0.00 sec)
+
+mysql> select * from datemo where acc_date between '2020-02-14' and '2020-03-02';
++------+------+------------+
+| id   | name | acc_date   |
++------+------+------------+
+|    1 | aaa  | 2020-03-02 |
+|    3 | ccc  | 2020-02-14 |
++------+------+------------+
+2 rows in set (0.00 sec)
+

@@ -1,0 +1,19 @@
+Integer data types
+
+1. byte - 1 bytes 
+2. short - 2 bytes
+3. int(10 digits) - 4 bytes
+4. long(19 digits) - 8 bytes
+
+Float data types
+
+1. float - 4 bytes
+2. doube - 8 bytes
+
+Character data types
+
+1. char - 2 bytes
+
+String - group of characters
+
+Boolean - True or False - 1 byte
